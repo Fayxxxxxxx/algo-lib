@@ -1,0 +1,7 @@
+# 编译产物不上传
+*.exe
+*.o
+*.out
+
+# VS Code 临时文件
+.vscode/
