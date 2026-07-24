@@ -1,3 +1,6 @@
+//这个公式很重要
+
+
 #include<bits/stdc++.h>
 using namespace std;
 int mod=9901;
