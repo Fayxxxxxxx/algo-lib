@@ -28,6 +28,7 @@
 输出样例：
 12
 
+//垃圾写法
 #include<bits/stdc++.h>
 using namespace std;
 
@@ -72,6 +73,43 @@ else
 
 cout<<ans<<endl;
 
+
+
+    return 0;
+}
+
+
+#include<bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+ios::sync_with_stdio(0);
+cin.tie(0);
+cout.tie(0);
+
+int n;
+cin>>n;
+
+vector<int> nums;
+
+for(int i=0;i<n;i++)
+{
+    int x;
+    cin>>x;
+
+    nums.push_back(x);
+}
+
+sort(nums.begin(),nums.end());
+
+int ans=0;
+
+for(int i=0;i<n;i++)
+{
+    ans+=abs(nums[n/2]-nums[i]);
+}
+cout<<ans<<endl;
 
 
     return 0;

@@ -28,7 +28,7 @@ while(i<mid&&j<right)
     else
     {
         tmp[k++]=nums[j++];
-        cnt += mid - i ;    // ★ 关键行：左半剩余的 [i..mid] 都 > a[j]
+        cnt += mid - i ;    // ★ 关键行：左半剩余的 [i..mid) 都 > a[j]
     }
 }
 
