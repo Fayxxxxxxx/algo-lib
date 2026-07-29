@@ -41,8 +41,7 @@
 
     //     while(l!=n)
     //     {
-    //     int left=l;//这里是l 不是一  如果不为1 那么l=0的时候 就没法找到一个合适的值
-    //     //因为0没有放进去排序
+    //     int left=l;
     //     int right=nums.size();
 
     //     while(right-left>1)
@@ -104,7 +103,7 @@
       return true;
   }
 
-  // 尝试扩展：已排序的 [l, r) + 新增 [r, r+p)
+  // 尝试扩展：已排序的 [l, r) + 新增 [r, r+p)  
   bool extend(int l, int r, int p) {
       // 1. 把新段 [r, r+p) 拷贝出来排序
       for (int i = r; i < r + p; i++)
@@ -138,8 +137,9 @@
 
       int l = 0, cnt = 0;
       while (l < n) {
-          int r = l, p = 1;
-          sorted[l] = a[l];  // 第一个元素总是合法的
+          int r = l, p = 1;//刚开始是空的 用p向后拓展
+          sorted[l] = a[l];  // 第一个元素总是合法的 
+          //刚开始为空 所以要先默认第一个已经排好序了才能向后加
 
           while (p) {
               if (r + p <= n && extend(l, r, p)) {
@@ -162,3 +162,194 @@
       while (k--) solve();
       return 0;
   }
+
+
+//自己的体会
+  #include<bits/stdc++.h>
+using namespace std;
+#define int long long
+const int N=5e5+5;
+int n,m,t;
+int a[N];
+int sorted[N];
+int tmp[N];
+int wait[N];
+bool check(int len)
+{
+    int true_len=min(len/2,m);
+    int val=0;
+    
+    for(int i=0;i<true_len;i++){
+        int diff=tmp[len-i-1]-tmp[i];
+        val+=diff*diff;
+        
+        if(val>t)
+        {
+            return false;
+        }
+    }
+    return true;
+}
+bool extend(int l,int r,int p)
+{
+    for(int i=r;i<r+p;i++){
+        wait[i-r]=a[i];
+    }
+    
+    sort(wait,wait+p);
+    
+    int k=0,i=l,j=0;//j是新的
+    
+    while(i<r&&j<p)
+    {
+        if(sorted[i]<=wait[j])
+        {
+            tmp[k++]=sorted[i++];
+        }
+        else
+        {
+            tmp[k++]=wait[j++];
+        }
+    }
+    
+    while(i<r)tmp[k++]=sorted[i++];
+    while(j<p)tmp[k++]=wait[j++];
+    
+    if(check(k))
+    {
+        for(int i=0;i<k;i++){
+            sorted[i+l]=tmp[i];
+        }
+        return true;
+    }
+    return false;
+    
+}
+void solve()
+{
+    cin>>n>>m>>t;
+    for(int i=0;i<n;i++)cin>>a[i];
+    
+    int l=0,cnt=0;
+    
+    while(l<n)
+    {
+        int r=l,p=1;
+        sorted[l]=a[l];
+        
+        while(p)
+        {
+            if(r+p<=n&&extend(l,r,p))
+            {
+               r+=p;
+               p<<=1;
+            }
+            else
+            {
+                p>>=1;
+            }
+        }
+        l=r;
+        cnt++;
+    }
+    
+    cout<<cnt<<endl;
+}
+signed main()
+{
+ios::sync_with_stdio(0);
+cin.tie(0);
+cout.tie(0);
+
+int k;
+cin>>k;
+
+while(k--){
+    solve();
+}
+
+
+    return 0;
+}   
+
+
+
+
+
+//默写
+int wait[N];
+int tmp[N];
+int nums[N];
+int sorted[N];
+
+int n,m,t;
+int l=0,cnt=0;
+
+bool check(int len)
+{
+    int true_len=min(len/2,m);
+
+    int total=0;
+
+    for(int i=0;i<true_len;i++)
+    {
+        int diff=tmp[len-i-1]-tmp[i];
+
+        total+=diff*diff;
+
+        if(total>t)
+        {
+            return false;
+        }
+    }
+    return true;
+}
+
+bool extend(int l,int r,int p)
+{
+    for(int i=r;i<r+p;i++){
+        wait[i-r]=nums[i];
+    }
+
+    int i=l,j=0,k=0;
+
+    while(i<r&&j<p)
+    {
+        if(sorted[i]<=wait[j])tmp[k++]=wait[j++];
+        else tmp[k++]=sorted[i++];
+    }
+
+    while(j<p)tmp[k++]=wait[j++];
+    while(i<r)tmp[k++]=sorted[i++];
+
+    if(check(r-l+1))
+    {
+        for(int i=0;i<k;i++)
+        {
+            sorted[i+l]=tmp[i];
+        }
+        return true;
+    }
+    return false;
+
+
+}
+while(l<n)
+{
+    int r=l,p=1;
+
+    while(p)
+    {
+        if(r+p<=n&&extend(l,r,p))
+        {
+            r+=p;
+            p<<=1;
+        }
+        else
+        {
+            p>>=1;
+        }
+    }
+    cnt++;
+    l=r;
+}

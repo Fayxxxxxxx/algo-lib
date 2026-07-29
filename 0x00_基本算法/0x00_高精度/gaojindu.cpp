@@ -189,3 +189,45 @@
   void print(vector<int>& a) {
       for (int i = a.size() - 1; i >= 0; i--) cout << a[i];
   }
+
+
+
+
+
+
+  vector<int> mul(vector<int>& nums,int a)
+  {
+    vector<int> c;
+
+    int t=0;
+
+    for(int i=0;i<nums.size()||t!=0;i++)
+    {
+        if(i<nums.size())
+        {
+            t+=nums[i]*a;
+        }
+        c.push_back(t%10);
+        t/=10;
+    }
+
+    return c;
+  }
+
+  vector<int> div(vector<int>& nums,int b)
+  {
+    vector<int> c;
+    int r=0;
+
+    for(int i=nums.size()-1;i>=0;i--){
+        r=r*10+nums[i];
+
+        c.push_back(r/b);
+        r=r%b;
+    }
+
+    reverse(c.begin(),c.end());
+
+    while(c.size()>1&&c.back()==0)c.pop_bacK();
+    return c;
+  }

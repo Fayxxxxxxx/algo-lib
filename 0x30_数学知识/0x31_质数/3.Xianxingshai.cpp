@@ -33,7 +33,7 @@ void init(int n)
 
         is_prime[x]=false;
 
-        if(i%primes[j]==0)
+        if(i%primes[j]==0)//不能和其他质数配
         {
             break;
         }

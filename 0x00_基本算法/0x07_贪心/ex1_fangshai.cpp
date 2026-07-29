@@ -84,3 +84,48 @@ cout<<ans<<endl;
 }
 
 
+
+//另一种思路 反向的 排序Max 让需求最大的牛去用大的防晒霜 而小牛用小的防晒霜
+
+
+#include<iostream>
+#include<algorithm>
+using namespace std;
+
+const int N=100010;
+int n,m,f[N];
+struct T{
+    int min,max;
+}a[N];
+
+bool cmp(T a,T b){
+    return a.max<b.max;
+}
+
+int main(){
+    cin>>n>>m;
+    for(int i=1;i<=n;i++) cin>>a[i].min>>a[i].max;
+
+    for(int i=1;i<=m;i++){
+        int x,y;cin>>x>>y;
+        f[x]+=y; //注意这里可能累加
+    }
+
+    sort(a+1,a+n+1,cmp);
+
+    int ans=0;
+    for(int i=1;i<=n;i++)
+    {
+        for(int j=a[i].min;j<=a[i].max;j++){
+            if(f[j]){
+                f[j]--,ans++;
+                break;
+            }
+        }
+    }
+    cout<<ans;
+
+    return 0;
+}
+
+
