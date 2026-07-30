@@ -24,7 +24,7 @@ ll power(ll a,ll b,ll mod)
 }
 int main()
 {
-   cout<<power(2,3,mod);
+   cout<<power(3,7,mod);
 
     return 0;
 }
