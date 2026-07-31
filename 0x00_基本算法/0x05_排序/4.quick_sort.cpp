@@ -22,7 +22,7 @@ void quick_sort(vector<int>& nums,int left,int right)
 
 //求第k小个
 
-int quick_sort(vector<int>& nums,int l,int r,int k)
+int quick_sort(vector<int>& nums,int l,int r,int k)//左闭右闭的写法
 {
     if(i==r)
     {

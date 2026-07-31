@@ -182,7 +182,7 @@ for(int x:nums)
 
 
 //正确的写法 nums不能push_back 而是给cow也一个id让他按照顺序输出
-
+//这里特别要注意这一点 我第二次写还是忘记处理了
 #include<bits/stdc++.h>
 using namespace std;
 
@@ -232,7 +232,7 @@ vector<cow> cows(n);
 for(int i=0;i<n;i++)
 {
     cin>>cows[i].left>>cows[i].right;
-    cows[i].id=i;
+    cows[i].id=i;//这里非常的重要！！！
 }
 
 priority_queue<range,vector<range>,tmp> pq;
@@ -276,4 +276,8 @@ for(int x:nums)
 }
     return 0;
 }
+
+
+
+
 

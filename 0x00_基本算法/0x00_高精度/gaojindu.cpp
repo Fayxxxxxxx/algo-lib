@@ -130,11 +130,6 @@
       return c;
   }
 
-  ---
-  完整模板
-
-  把乘法和除法放一起，你存好：
-
   #include<bits/stdc++.h>
   using namespace std;
 
@@ -150,7 +145,7 @@
       for (int i = 0; i < a.size() || t; i++) {
           if (i < a.size()) t += a[i] * b;
           c.push_back(t % 10);
-          t /= 10;
+          t / = 10;
       }
       return c;
   }
@@ -172,7 +167,7 @@
   }
 
   // 大数 ÷int
-  vector<int> div_int(vector<int>& a, int b) {
+  vector<int> div_int(vector<int>& a, int b) {//默认十进制
       vector<int> c;
       int r = 0;
       for (int i = a.size() - 1; i >= 0; i--) {
@@ -189,11 +184,6 @@
   void print(vector<int>& a) {
       for (int i = a.size() - 1; i >= 0; i--) cout << a[i];
   }
-
-
-
-
-
 
   vector<int> mul(vector<int>& nums,int a)
   {

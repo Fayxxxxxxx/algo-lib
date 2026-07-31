@@ -71,6 +71,18 @@ void add(vector<int> nums,int a)
 void add(vector<int>& a,vector<int>& b)
 {
     vector<int> c(max(a.size(),b.size())+1);
+    int t=0;
 
+    for(int i=0;i<c.size();i++)
+    {
+        if(i<a.size())t+=a[i];
+        if(i<b.size())t+=b[i];
+        c[i]=t%10;
+        t/=10;
+    }
+
+    while(c.size()>1&&c.back()==0)c.pop_back();
+
+    return c;
     
 }
