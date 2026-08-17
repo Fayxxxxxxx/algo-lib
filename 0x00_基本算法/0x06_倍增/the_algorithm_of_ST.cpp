@@ -94,3 +94,17 @@ nums.resize(n+1);
 }
 
 
+
+for(int i=1;i<=n;i++)f[i][0]=a[i];
+int t=log(n)/log(2)+1;
+
+for(int j=1;j<t;j++)
+{
+    for(int i=1;i<=n+1-(1<<j);i++)
+    {
+        f[i][j]=max(f[i][j-1],f[i+(1<<j-1)][j-1]);
+    }
+}
+
+int k=log(r-l+1)/log(2);
+return max(f[l][k],f[r-(1<<k)+1][k]);
