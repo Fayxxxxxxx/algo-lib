@@ -49,7 +49,7 @@ bool cmp(int x,int y)
 
     int lcp=get_lcp(x,y);
 
-    if(lcp==min(len1,len2))
+    if(lcp==min(len1,len2))//字典序 前面都一样 谁短谁字典序小
     {
         return len1<len2;
     }
@@ -75,7 +75,9 @@ sa.resize(n);
 height.resize(n);
 //x 表示从x 开始而n-x代表长度 0-base
 
-for(int i=0;i<n;i++)sa[i]=i;
+for(int i=0;i<n;i++)sa[i]=i;//从第几位开始 然后向后算后缀
+//如 banana i=0的时候得到的后缀就是 banana
+//i=1的时候是 anana
 sort(sa.begin(),sa.end(),cmp);
 height[0]=0;
 for(int i=1;i<n;i++)
