@@ -40,6 +40,8 @@ signed main()
         {
             int len=i-nex[i];
             
+            //t=i−nex[i]<i
+            //t/i>1  才能满足重复次数>1 所以i%len要==0
             if(nex[i]&&i%len==0)
             {
                 cout<<i<<" "<<i/len<<endl;

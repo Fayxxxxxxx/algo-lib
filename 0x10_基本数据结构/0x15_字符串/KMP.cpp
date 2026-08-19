@@ -51,7 +51,7 @@ signed main()
 
         if(j==m)
         {
-            cout<<i-m+1<<endl;
+            cout<<i-m+1<<endl;//找到了一个 继续向后找 用到重复的
 
             j=ne[j];//兜底
         }

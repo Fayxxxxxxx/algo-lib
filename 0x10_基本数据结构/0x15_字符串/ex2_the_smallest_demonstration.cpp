@@ -7,12 +7,13 @@
       while (i < n && j < n) {
           int k = 0;
           while (k < n && s[i + k] == s[j + k]) k++;
-          if(k==n)break;
+          if(k==n)break;//全部由一个字符构成
           if (s[i + k] > s[j + k])
-              i = i + k + 1;
+              i = i + k + 1;//说明他不是字典序最小 他要往后走
+            //重复了k个 所以要到i+k+1处
           else
               j = j + k + 1;
-          if (i == j) j++;
+          if (i == j) j++;//反正错开就对了 
       }
       return min(i, j);
   }
