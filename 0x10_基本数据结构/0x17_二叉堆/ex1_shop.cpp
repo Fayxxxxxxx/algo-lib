@@ -42,7 +42,7 @@ int main()
         for(int day=Max_time;day>=1;day--)//这一招惊为天人
         {
             // 把所有截止日期 >= day 的任务加入
-            while(j<n && a[j].first>=day)
+            while(j<n && a[j].first>=day)//因为一天只能卖一件商品
             {
                 pq.push(a[j].second);
                 j++;
