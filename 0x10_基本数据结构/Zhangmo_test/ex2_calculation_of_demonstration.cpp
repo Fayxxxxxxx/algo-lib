@@ -239,7 +239,7 @@ vector<string> middle_to_back(string s)
             if(!st.empty()&&st.top()=='(')
             {
                 st.pop();
-                expect_num=false;
+                expect_num=false;//右括号后面当然是一个符号 而不是正负号
             }
             // 如果没有，说明这个右括号是多余的，直接忽略
         }
@@ -338,6 +338,173 @@ cin.tie(0);
     vector<string> res=middle_to_back(s);
 
     cout<<cal(res)<<endl;
+
+    return 0;
+}
+
+
+
+
+#include<bits/stdc++.h>
+using namespace std;
+
+#define endl '\n'
+using ll=long long;
+using pii=pair<int,int>;
+using pll=pair<ll,ll>;
+using vi=vector<int>;
+using vll=vector<ll>;
+ll pow(ll a,ll b)
+{
+    ll res=1;
+
+    while(b)
+    {
+        if(b&1)
+        {
+            res=res*a;
+        }
+        a=a*a;
+        b>>=1;
+    }
+    return res;
+}
+
+int cal_pri(char x)
+{
+    if(x=='(')
+    {
+        return 0;
+    }
+    else if(x=='+'||x=='-')
+    {
+        return 1;
+    }
+    else if(x=='*'||x=='/')
+    {
+        return 2;
+    }
+    else if(x=='^')
+    {
+        return 3;
+    }
+    return  4;//'~' 最高优先级
+}
+vector<string> middle_to_back(string s)
+{
+    stack<char> st;
+    vector<string> res;
+
+    bool is_num=true;//为负符号
+    for(int i=0;i<(int)s.size();i++)
+    {
+       if(isdigit(s[i]))
+       {
+        string tmp;
+
+        while(i<(int)s.size()&&isdigit(s[i]))
+        {
+            tmp+=s[i];
+            i++;
+        }
+        i--;
+        res.push_back(tmp);
+        is_num=false;
+       }
+       else if(s[i]=='(')
+       {
+        st.push(s[i]);
+        is_num=true;
+       }
+       else if(s[i]==')')
+       {
+        while(!st.empty()&&st.top()!='(')
+        {
+            res.push_back(string(1,st.top()));
+            st.pop();
+        }
+        
+        if(!st.empty()&&st.top()=='(')
+        {
+            st.pop();
+            is_num=false;
+        }
+       }
+       else
+       {
+        if((s[i]=='+'||s[i]=='-')&&is_num)
+        {
+            if(s[i]=='-')
+            st.push('~');
+        }
+        else
+        {
+            while(!st.empty()&&cal_pri(st.top())>=cal_pri(s[i]))
+            {
+                res.push_back(string(1,st.top()));
+                st.pop();
+            }
+            st.push(s[i]);
+            is_num=true;
+        }
+       } 
+    }
+
+    while(!st.empty())
+    {
+        if(st.top()!='(')
+        {
+            res.push_back(string(1,st.top()));
+        }
+        st.pop();
+    }
+
+    return res;
+}
+int cal(vector<string>& res)
+{
+    stack<ll> num;
+    for(string s:res)
+    {
+        if(isdigit(s[0]))
+        {
+            num.push(stoll(s));
+        }
+        else if(s=="~")
+        {
+            ll a=num.top();
+            num.pop();
+            num.push(-a);
+        }
+        else
+        {
+            ll a=num.top();
+            num.pop();
+            ll b=num.top();
+            num.pop();
+
+            if(s=="+")num.push(b+a);
+            else if(s=="-")num.push(b-a);
+            else if(s=='*')num.push(a*b);
+            else if(s=="/")num.push(b/a);
+            else if(s=="^")num.push(pow(b,a));
+        }
+    }
+
+    return num.top();
+}
+int main()
+{
+ios::sync_with_stdio(0);
+cin.tie(0);
+string s;
+    cin>>s;
+
+    vector<string> res=middle_to_back(s);
+
+    cout<<cal(res)<<endl;
+
+
 
     return 0;
 }
