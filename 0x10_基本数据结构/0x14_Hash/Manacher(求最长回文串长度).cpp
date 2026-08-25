@@ -39,7 +39,7 @@ while(cin>>s&&s!="END")
         if(i<=r)
         {
             int j=2*mid-i;
-            d[i]=min(d[j],r-i);
+            d[i]=min(d[j],r-i);//不能超过右边界
         }
         else
         {
@@ -67,4 +67,42 @@ while(cin>>s&&s!="END")
 
 
     return 0;
+}
+
+
+tmp[++cnt]='#';
+for(int i=0;i<n;i++)
+{
+    tmp[++cnt]=s[i];
+    tmp[++cnt]='#';
+}
+
+m=cnt;
+int d[i];
+int mid=0;
+int r=0;
+int ans=0;
+for(int i=1;i<=m;i++)
+{
+if(i<=r)
+{
+    int j=2*mid-i;
+    d[i]=min(d[j],i-r);
+}
+else
+{
+    d[i]=0;
+}
+
+while(i-d[i]-1>=1&&i+d[i]+1<=m&&tmp[i-d[i]-1]==tmp[i+d[i]+1])
+{
+    d[i]++;
+}
+
+if(i+d[i]>r)
+{
+    i=mid;
+    r=i+d[i];
+}
+ans=max(ans,d[i]);
 }

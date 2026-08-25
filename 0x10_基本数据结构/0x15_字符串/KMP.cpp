@@ -59,3 +59,37 @@ signed main()
 
     return 0;
 }
+
+
+for(int i=2,j=0;i<=n;i++)
+{
+    while(j&&s[i]!=s[j+1])
+    {
+        j=nex[j];
+    }
+
+    if(s[i]==s[j+1])
+    {
+        j++;
+    }
+
+    nex[i]=j;
+}
+for(int i=1,j=0;j<=n;i++)
+{
+    while(j&&s[i]!=p[j+1])
+    {
+        j=nex[j];
+    }
+
+    if(s[i]==p[j+1])
+    {
+        j++;
+    }
+
+    if(j==m)
+    {
+        cout<<i-m+1<<endl;
+        j=nex[j];
+    }
+}
