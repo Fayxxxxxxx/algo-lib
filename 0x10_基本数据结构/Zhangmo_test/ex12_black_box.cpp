@@ -32,7 +32,7 @@ cin.tie(0);
 
     int pos=0;
 
-    for(int i=0;i<n;i++)
+    for(int i=0;i<n;i++)//第几次get操作
     {
         while(pos<u[i])
         {
@@ -41,7 +41,7 @@ cin.tie(0);
 
             right.push(left.top());
             left.pop();
-        }
+        }//每次出来的时候 pos==u[i] 这个时候right里面的数据量正好是u[i]
 
         cout<<right.top()<<endl;
         left.push(right.top());

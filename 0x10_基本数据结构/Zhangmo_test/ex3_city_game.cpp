@@ -60,3 +60,70 @@ for(int i=0;i<n;i++)
 cout<<ans*3<<endl;
     return 0;
 }
+
+
+#include<bits/stdc++.h>
+using namespace std;
+
+#define endl '\n'
+using ll=long long;
+using pii=pair<int,int>;
+using pll=pair<ll,ll>;
+using vi=vector<int>;
+using vll=vector<ll>;
+
+int main()
+{
+ios::sync_with_stdio(0);
+cin.tie(0);
+int n,m;
+cin>>n>>m;
+vector<vector<char>> grid(n,vector<char>(m));
+for(int i=0;i<n;i++)
+{
+    for(int j=0;j<m;j++)cin>>grid[i][j];
+}
+vi h(m,0);
+int ans=0;
+for(int i=0;i<n;i++)
+{
+    for(int j=0;j<m;j++)
+    {
+        if(grid[i][j]=='F')
+        {
+            h[j]++;
+        }
+        else
+        {
+            h[j]=0;
+        }
+    }
+        
+        vi left(m,-1);
+        vi right(m,m);
+        stack<int> st;
+        
+        for(int k=0;k<m;k++)
+        {
+            int x=h[k];
+            while(!st.empty()&&h[st.top()]>=x)
+            {
+                right[st.top()]=k;
+                st.pop();
+            }
+            if(!st.empty())
+            {
+                left[k]=st.top();
+            }
+            
+            st.push(k);
+        }
+        
+        for(int k=0;k<m;k++)
+        {
+            ans=max(ans,(right[k]-left[k]-1)*h[k]);
+        }
+    }
+    cout<<ans*3<<endl;
+    return 0;
+}

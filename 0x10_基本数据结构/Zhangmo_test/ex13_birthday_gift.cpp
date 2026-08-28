@@ -212,4 +212,91 @@ cout<<ans<<endl;
 
 
     return 0;
+} 
+
+
+
+#include<bits/stdc++.h>
+using namespace std;
+
+#define endl '\n'
+using ll=long long;
+using pii=pair<int,int>;
+using pll=pair<ll,ll>;
+using vi=vector<int>;
+using vll=vector<ll>;
+const int N=1e5+10;
+int l[N],r[N];
+ll a[N],b[N];
+bool del[N];
+int cnt=0;//里面正数块的数量
+int len=0;//实际长度
+ll ans=0;
+int main()
+{
+ios::sync_with_stdio(0);
+cin.tie(0);
+int n,m;
+cin>>n>>m;
+for(int i=0;i<n;i++)
+{
+    ll x;
+    cin>>x;
+    if(x==0)continue;
+    if(len==0||((x>0)!=(b[len]>0)))
+    {
+        b[++len]=x;
+    }
+    else
+    {
+        b[len]+=x;
+    }
+}
+priority_queue<pll,vector<pll>,greater<pll>> pq;
+for(int i=1;i<=len;i++)
+{
+    a[i]=b[i];
+    l[i]=i-1;
+    r[i]=i+1;
+
+    if(a[i]>0)
+    {
+        ans+=a[i];
+        cnt++;
+    }
+    pq.push({abs(a[i]),i});
+}
+auto remove=[&](int x)
+{
+    if(x<1||x>len)return ;
+    int left=l[x];
+    int right=r[x];
+
+    del[x]=true;
+    l[right]=left;
+    r[left]=right;
+};
+
+while(cnt>m)
+{
+    auto [val,id]=pq.top();
+    pq.pop();
+    if(del[id])continue;
+
+    if(a[id]<0&&(l[id]==0||r[id]==len+1))continue;
+    
+    ans-=val;
+    cnt--;
+    int left=l[id];
+    int right=r[id];
+   
+    if(left>=1)a[id]+=a[left];
+    if(right<=len)a[id]+=a[right];
+    remove(left);
+    remove(right);
+    pq.push({abs(a[id]),id});
+}
+cout<<ans<<endl;
+
+    return 0;
 }

@@ -660,7 +660,7 @@ pll get_mem(ll need)
 
           if(l+need<=r)
           {
-            mem.insert(l+need,r);
+            mem.insert({l+need,r});
           }
 
           return {l,l+need-1};
@@ -669,12 +669,13 @@ pll get_mem(ll need)
     return {-1,-1};
 }
 
-void free_mem(ll l,ll r)
+void free_mem(ll l,ll r)//把这个区间进行释放 很有可能可以和左右进行合并
+//这样上面的查找功能才能更好的满足need的需求
 {
-    auto it=mem.lower_bound({l,LLONG_MIN});
+    auto it=mem.lower_bound({l,LLONG_MIN});//第二位全都满足 所以实际上就是去比较第一位
     if(it!=mem.begin())
     {
-        auto pre=prev(it);
+        auto pre=prev(it);//与prev函数相对应的函数是next函数 用于取指针
 
         if(pre->second+1==l)
         {
@@ -687,7 +688,7 @@ void free_mem(ll l,ll r)
 
     it(it!=mem.end()&&r+1==it->first)
     {
-        r=it->right;
+        r=it->second;
         mem.erase(it);
     }
     mem.insert({l,r});
@@ -737,7 +738,7 @@ void work_out(ll now)
     if(!use.empty()&&use.top().end()==now)
     {
         work_out(now);
-    }
+    }//处理P=0的情况 就是放进去马上就释放掉了 
 }
 int main()
 {
@@ -748,7 +749,8 @@ mem.insert({0,n-1});
 ll t,m,p;
 while(cin>>t>>m>>p&&(t||m||p))
 {
-    while(!use.empty()&&use.top().end<=t)
+    while(!use.empty()&&use.top().end<=t)//为啥有个等于号呢 因为是左闭右开 所以右边被
+    //取等号了也没关系 这里要离散的处理end的问题 而不是连续的 因为时间跨度是1e9 必超时
     {
         ll now=use.top().end;
         work_out(now);

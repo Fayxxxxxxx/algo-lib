@@ -97,6 +97,7 @@
               tmp /= primes[i];
           }
       }
+     
 
       vector<int> ans(1, 1);
       for(int i = 0; i < cnt; i++)
