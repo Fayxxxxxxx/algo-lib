@@ -85,18 +85,18 @@ bool dfs(int done,int cur,int start)
 
     if(cur==cap)return dfs(done+1,0,0);//如果成一组了 就dfs下一组
     int last=-1;//和之前的是不是一样的
-    for(int i=start;i<n;i++)//防止产生重复
-    {
-        if(last==nums[i])continue;//选过且失败 跳过
-        if(vis[i])continue;//选过了 跳过
-        if(cur+nums[i]>cap)continue;//成不到一组 跳过
-        vis[i]=1;
-        if(dfs(done,cur+nums[i],i+1))return true;
-        vis[i]=0;
-        last=nums[i];//已经尝试选择这个的可能 并失败 所以下次不用了
-        if(cur+nums[i]==cap)return false;//如果已经用了一个封口的还失败了 肯定有问题(这个好难想)
-        if(cur==0)return false;//如果尝试了目前的最大都不可以 那么一定无解 也就是我选了最大了 然后去递归递归 结果最后的返回值是false 说明我选了最大还是不行 所以return false
-    }
+        for(int i=start;i<n;i++)//防止产生重复
+        {
+            if(last==nums[i])continue;//选过且失败 跳过
+            if(vis[i])continue;//选过了 跳过
+            if(cur+nums[i]>cap)continue;//成不到一组 跳过
+            vis[i]=1;
+            if(dfs(done,cur+nums[i],i+1))return true;
+            vis[i]=0;
+            last=nums[i];//已经尝试选择这个的可能 并失败 所以下次不用了
+            if(cur+nums[i]==cap)return false;//如果已经用了一个封口的还失败了 肯定有问题(这个好难想)
+            if(cur==0)return false;//如果尝试了目前的最大都不可以 那么一定无解 也就是我选了最大了 然后去递归递归 结果最后的返回值是false 说明我选了最大还是不行 所以return false
+        }
     return false;
 }
 int main()
