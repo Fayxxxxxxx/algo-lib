@@ -14,7 +14,7 @@ int mid=left+(right-left)/2;
 
 merge_sort(nums,left,mid);//从left到mid 左闭右开
 merge_sort(nums,mid,right);
-
+// 到这里后就假设nums已经有序了 然后拿有序的去求
 int k=0;
 
 int i=left,j=mid;

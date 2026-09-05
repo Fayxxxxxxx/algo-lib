@@ -23,3 +23,38 @@ for(int i=2;i*i<=n;i++)
     }
 }
 }
+
+
+vi primes;
+void get_primes(int n)
+{
+    vb composite(n+1,false);
+
+    for(int i=2;i<=n;i++)
+    {
+        if(composite[i])continue;
+
+        primes.push_back(i);
+
+        if(1LL*i*i>=n)continue;
+
+        for(int j=i*i;j<=n;j+=i)
+        {
+            composite[i]=true;
+        }
+    }
+}
+
+
+void solve(int n)
+{
+    for(int i=2;i<=n;i++)
+    {
+        if(vis[i])continue;
+        
+        for(int j=i*i;j<=n;j+=i)
+        {
+            vis[i]=1;
+        }
+    }
+}

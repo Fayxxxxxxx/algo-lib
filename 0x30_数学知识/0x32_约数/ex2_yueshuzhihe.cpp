@@ -16,12 +16,21 @@ int main()
 {
 ios::sync_with_stdio(0);
 cin.tie(0);
-int t;
-cin>>t;
-while(t--)
+ll n,k;
+cin>>n>>k;
+
+ll ans=n*k;
+
+for(ll l=1,r;l<=min(n,k);l=r+1)
 {
-    solve();
+    ll p=n/l;
+
+    r=n/p;
+
+    ans-=(l+r)*(r-l+1)/2;
 }
+
+cout<<ans<<endl;
 
 
 

@@ -336,7 +336,8 @@ bool extend(int l,int r,int p)
 }
 while(l<n)
 {
-    int r=l,p=1;
+    int r=l,p=1;//这里是左闭右开的写法 我发现对于归并或者倍增类的题目用左闭右开好写
+    
 
     while(p)
     {

@@ -63,9 +63,6 @@ while(cin>>s&&s!="END")
     
     tt++;
 }
-
-
-
     return 0;
 }
 

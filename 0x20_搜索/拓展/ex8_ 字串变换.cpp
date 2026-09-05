@@ -56,8 +56,9 @@ for(auto [from,to]:pos)
     {
         string t=pos_s;
         
-        t.replace(ps,from.size(),to);
-        ps=pos_s.find(from,ps+1);
+        t.replace(ps,from.size(),to);//replace的用法值得关注
+        ps=pos_s.find(from,ps+1);//ps的用法也值得关注 不加之前就是去找第一个
+        //如果加了第二个数就从第二个数开始去寻找
         if(pos_mp.count(t))continue;
 
         pos_mp[t]=pos_mp[pos_s]+1;

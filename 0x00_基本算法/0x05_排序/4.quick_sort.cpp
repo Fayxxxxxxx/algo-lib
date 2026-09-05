@@ -42,11 +42,11 @@ int quick_sort(vector<int>& nums,int l,int r,int k)//左闭右闭的写法
       swap(nums[i],nums[j]);
     }
 
-    int len=j-i+1;
+    int len=j-l+1;
 
     if(k<=len)
     {
-        return quick_sort(nums,l,r,k);
+        return quick_sort(nums,l,j,k);//将区间分为[l,j]和[j+1,r];
     }
     else
     {
@@ -94,3 +94,35 @@ public:
     return quick_sort(nums,0,nums.size()-1,k);
     }
 };
+
+int quicksort(vi &nums,int l,int r,int k)
+{
+    if(l==r)return nums[l];
+
+    int i=l-1;
+    int j=r+1;
+
+
+    int pivot=nums[l+(r-l)/2];
+    while(i<j)
+    {
+        do i++;while(nums[i]>pivot);
+        do j--;while(nums[j]<pivot);
+
+        
+        if(i<j)swap(nums[i],nums[j]);
+    }
+
+    int len=j-l+1;
+
+    if(k<=len)
+    {
+        return quicksort(nums,l,j,k);
+    }
+    else
+    {
+        return quicksort(nums,j+1,r,k-len);
+    }
+
+
+}

@@ -81,3 +81,41 @@ void init(int n)
         }
     }
 }
+
+
+const int N=1e5;
+int cnt;
+int primes[N];
+vb is_prime(N,true);
+
+void init(int n)
+{
+    is_prime[0]=false;
+    is_prime[1]=false;
+
+    for(int i=2;i<=n;i++)
+    {
+        if(is_prime[i])
+        {
+            primes[cnt++]=i;
+        }
+
+        for(int j=0;j<cnt;j++)
+        {
+            int x=primes[j]*i;
+
+            if(x>n)
+            {
+                break;
+            }
+
+            is_prime[x]=true;
+
+            if(i%primes[j]==0)//线性筛一直筛到自己的最小公因子为止 然后后面的就
+            //不做了 因为后面是别人的最小共因子了 
+            {
+                break;
+            }
+        }
+    }
+}
