@@ -37,12 +37,35 @@ void init()
             primes.push_back(i);
         }
 
-        for(int x:primes)
+        for(int p:primes)
         {
-            if(x>minp[i])break;
-            if(x>N/i)break;
+            if(p>n/i)break;
+            min[i*p]=p;
 
-            minp[i*x]=x;
+            if(p==min[i])break;//p已经是i的最小质因数了
         }
+    }
+}
+
+vector<pair<ll,int>> fact;
+
+for(int p=2;p<=n/p;p++)
+{
+    if(n%p==0)
+    {
+        int cnt=0;
+
+        while(n%p==0)
+        {
+            n/=p;
+            cnt++;
+        }
+
+        fact.push_back({p,cnt});
+    }
+
+    if(n>1)
+    {
+        fact.push_back({n,1});
     }
 }

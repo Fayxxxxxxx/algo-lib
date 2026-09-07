@@ -58,3 +58,21 @@ void solve(int n)
         }
     }
 }
+
+
+vi primes;
+void solve(int n)
+{
+    for(int i=2;i<=n;i++)
+    {
+        if(is_prime[i])
+        {
+          primes.push_back(i);
+
+          for(int p=i*i;p<=n;p+=i)
+          {
+            is_prime[p]=false;
+          }
+        }
+    }
+}

@@ -36,3 +36,26 @@ cout<<ans<<endl;
 
     return 0;
 }
+
+
+ll get_num(ll n,vector<pair<ll,int>>& fact)
+{
+    ll ans=1;
+    for(auto [p,e]:fact)
+    {
+        ll sum=1;
+        ll pw=1;
+
+        for(int i=1;i<=e;i++)
+        {
+            pw*=p;
+            sum+=pw;//1+p^2+p^3+......
+        }//也可以写成等比数列求和的形式 但是如果太大要取模 那么还要处理逆元的事情
+
+        ans*=sum;
+    }
+    return ans;
+}
+
+
+    

@@ -119,3 +119,66 @@ void init(int n)
         }
     }
 }
+
+
+
+is_prime[0]=false;
+is_prime[1]=false;
+
+
+for(int i=2;i<=n;i++)
+{
+    if(is_prime[i])
+    {
+        primes.push_back(i);
+    }
+
+    for(int p:primes)
+    {
+        if(p>=n/i)break;
+
+        is_prime[p*i]=false;
+
+        if(i%p==0)break;
+    }
+}
+
+
+
+minp;
+
+for(int i=2;i<=n;i++)
+{
+    if(minp[i]==0)
+    {
+        minp[i]=i;//质数本身的最小质因数就是他自己
+        primes.push_back(i);
+    }
+
+    for(int p:pirmes)
+    {
+        if(p>=n/i)break;
+
+        minp[i*p]=p;
+
+        if(p==min[i])break;
+    }
+}
+
+//适用于小数很多
+vector<pair<ll,int>> fact;
+
+while(n>1)
+{
+    int e=0;
+    int p=minp[n];
+
+    while(n%p==0)
+    {
+        e++;
+        n/=p;
+    }
+
+    fact.push_back({p,e});
+}
+return res;
