@@ -10,6 +10,7 @@ using vll=vector<ll>;
 using vc=vector<char>;
 using vb=vector<bool>;
 using vs=vector<string>;
+using i128=__int128_t;
 const int INF=0x3f3f3f3f;
 
 int main()

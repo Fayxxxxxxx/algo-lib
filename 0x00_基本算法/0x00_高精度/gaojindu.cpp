@@ -221,3 +221,53 @@
     while(c.size()>1&&c.back()==0)c.pop_bacK();
     return c;
   }
+
+
+  vector<int> add(vi &a,vi &b)
+  {
+    int t=0;
+    vi c;
+
+    for(int i=0;i<a.size()||i<b.size()||t;i++)
+    {
+        if(i<a.size())t+=a[i];
+        if(i<b.size())t+=b[i];
+
+        c.push_back(t%10);
+
+        t/=10;
+    }
+
+    return c;
+  }
+
+  vector<int> sub(vi &a,vi& b)//默认a>=b;
+  {
+    vi c;
+    int borrow=0;
+
+    for(int i=0;i<a.size();i++)
+    {
+        int x=a[i]-borrow;
+
+        if(i<b.size())
+        {
+            x-=b[i];
+        }
+
+        if(x<0)
+        {
+            x+=10;
+            borrow=1;
+        }
+        else
+        {
+            borrow=0;
+        }
+
+        c.push_back(x);
+    }
+    
+    while(c.size()>1&&c.back()==0)c.pop_back();
+    return c; 
+  }
