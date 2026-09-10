@@ -145,3 +145,96 @@ bool merge(ll&A,ll&M,ll a,ll m)
 
     return true;
 }
+
+
+
+
+
+#include<bits/stdc++.h>
+using namespace std;
+
+#define endl '\n'
+using ll=long long;
+using pii=pair<int,int>;
+using pll=pair<ll,ll>;
+using vi=vector<int>;
+using vll=vector<ll>;
+using vc=vector<char>;
+using vb=vector<bool>;
+using vs=vector<string>;
+using i128=__int128_t;
+const int INF=0x3f3f3f3f;
+ll exgcd(ll a,ll b,ll&x,ll& y)
+{
+    if(b==0)
+    {
+        x=1;
+        y=0;
+
+        return a;
+    }
+
+    ll x,y;
+    ll d=exgcd(b,a%b,x,y);
+
+    x=y1;
+    y=x1-a/b*y1;
+
+    return d;
+}
+bool merge(ll&A,ll&M,ll a,ll m)
+{
+  ll c=a-A;
+  ll x,y;
+
+  ll d=exgcd(M,m,x,y);
+
+  if(d%c!=0)
+  {
+    return false;
+  }
+
+  ll mod=m/d;
+  ll k=((i128)x*(c/d))%mod;
+  k=(k%mod+mod)%mod;
+
+  A=((i128)k*M+A);
+   M=M/d*m;
+
+   A=(A%M+M)%M;
+   return true;
+}
+ll excrt(vll&a,vll&m)
+{
+    ll A=a[0];
+    ll M=m[0];
+
+    for(int i=1;i<n;i++)
+    {
+        if(!merge(A,M,a[i],m[i]))
+        {
+          return -1;
+        }
+    }
+    return (A%M+M)%M;
+}
+int main()
+{
+ios::sync_with_stdio(0);
+cin.tie(0);
+ll n;
+cin>>n;
+
+vll a(n),m(n);
+
+for(int i=0;i<n;i++)
+{
+    cin>>a[i]>>m[i];
+}
+
+
+
+
+
+    return 0;
+}

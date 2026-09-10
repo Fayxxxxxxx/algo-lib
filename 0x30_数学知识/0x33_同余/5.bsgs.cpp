@@ -150,3 +150,94 @@ cout<<bsgs(a,b,p)<<endl;
 
     return 0;
 }
+
+
+
+
+
+
+
+
+
+
+#include<bits/stdc++.h>
+using namespace std;
+
+#define endl '\n'
+using ll=long long;
+using pii=pair<int,int>;
+using pll=pair<ll,ll>;
+using vi=vector<int>;
+using vll=vector<ll>;
+using vc=vector<char>;
+using vb=vector<bool>;
+using vs=vector<string>;
+using i128=__int128_t;
+const int INF=0x3f3f3f3f;
+ll qpow(ll a,ll b,ll mod)
+{
+    ll res=1;
+
+    while(b)
+    {
+        if(b&1)res=(i128)res*a%mod;
+        b>>=1;
+        a=(i128)a*a%mod;
+    }
+    return res%mod;
+}
+ll bsbg(ll a,ll b,ll p)
+{
+a%=p;
+b%=p;
+
+if(b==1)
+{
+    return 0;
+}
+
+ll T=ceil(sqrt(double(p)));
+ll cur=b;
+unordered_map<ll,ll> mp;
+
+for(ll j=0;j<T;j++)
+{
+    mp[cur]=j;
+    cur=(i128)cur*a%p;
+}
+
+ll step=qpow(a,T,p);
+cur=step;
+
+for(ll i=1;i<=T+1;i++)
+{
+    auto it=mp.find(cur);
+
+    if(it!=mp.end())
+    {
+        ll j=it->second;
+        
+        ll x=i*T-j;
+
+        if(x>=0)
+        {
+            return x;
+        }
+    }
+
+    cur=(i128)cur*step%p;
+}
+
+return -1;
+
+}
+int main()
+{
+ios::sync_with_stdio(0);
+cin.tie(0);
+ll a,b,p;
+cin>>a>>b>>p;
+ll ans=bsbg(a,b,p);
+cout<<ans<<endl;
+    return 0;
+}
