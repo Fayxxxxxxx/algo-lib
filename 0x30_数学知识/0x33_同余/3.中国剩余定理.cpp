@@ -144,7 +144,7 @@ ll crt(vll&a,vll&m)
 
    for(int i=0;i<a.size();i++)
    {
-    ll mi=M/b[i];
+    ll mi=M/m[i];
 
     ll ti=inv(mi%m[i],m[i]);
     if(ti==-1)
