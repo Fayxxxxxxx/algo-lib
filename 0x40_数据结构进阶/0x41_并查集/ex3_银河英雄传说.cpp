@@ -70,7 +70,11 @@ int t;
 
             if(x==y)
             {
-                cout<<abs(d[i]-d[j])-1<<endl;
+                if(i==j)cout<<0<<endl;
+                else
+                {
+                    cout<<abs(d[i]-d[j])-1<<endl;
+                }
             }
             else
             {
