@@ -136,7 +136,7 @@ ll bsgs(ll a,ll b,ll p)
            }
         }
 
-        cur=(i128)cur*step%p;
+        cur=(i128)cur*step%p;//step作为一步 
     }
     return -1;
 }
