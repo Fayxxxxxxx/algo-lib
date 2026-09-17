@@ -37,7 +37,7 @@ vi a(n+1);
 
 for(int i=1;i<=n;i++)cin>>a[i];
 
-for(int i=1;i<n=;i++)
+for(int i=1;i<=n;i++)
 {
     add(i,a[i]-a[i-1]);
 }
