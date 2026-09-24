@@ -62,7 +62,7 @@ for(int i=0;i<n;i++)
     ll x=a[i];
     int pos=get(x);
 
-    left[i]=i-query(tr1,pos);
+    left[i]=i-query(tr1,pos);//左边比自己大的 
     add(tr1,pos);
 }
 tr1.assign(n,0);
@@ -71,7 +71,7 @@ for(int i=n-1;i>=0;i--)
     ll x=a[i];
     int pos=get(x);
 
-    right[i]=n-1-i-query(tr1,pos);
+    right[i]=n-1-i-query(tr1,pos);//右边比自己大的
     add(tr1,pos);
 }
 ll ans=0;
@@ -87,9 +87,9 @@ right.assign(n,0);
 for(int i=0;i<n;i++)
 {
     ll x=a[i];
-    int pos=get(x-1);
+    int pos=get(x);
 
-    left[i]=query(tr2,pos-1);
+    left[i]=query(tr2,pos-1);//左边比自己小的
     add(tr2,pos);
 }
 tr2.assign(n,0);//assign前面是长度 后面是value
