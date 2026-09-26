@@ -53,7 +53,7 @@ int cal()
         int pos=get(x);
 
         ans+=i-query(pos);
-        add(pos);
+        add(pos);//把值作为下标 把所加的值作为出现的次数
     }
     return ans;
 }

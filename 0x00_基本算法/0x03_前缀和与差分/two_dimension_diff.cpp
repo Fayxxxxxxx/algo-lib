@@ -23,15 +23,14 @@ public:
         diff[x2 + 1][y2 + 1] += val;
     }
 
-    // 步骤2：还原得到最终矩阵（原地修改 diff 为前缀和）
+    // 步骤2：还原得到最终矩阵
     vector<vector<long long>> getResult() {
         vector<vector<long long>> res(n + 1, vector<long long>(m + 1, 0));
         
         for (int i = 1; i <= n; i++) {
             for (int j = 1; j <= m; j++) {
                 // 二维前缀和递推公式
-                diff[i][j] += diff[i - 1][j] + diff[i][j - 1] - diff[i - 1][j - 1];
-                res[i][j] = diff[i][j];
+                res[i][j]= res[i - 1][j] + res[i][j - 1] - res[i - 1][j - 1]+diff[i][j];
             }
         }
         return res;
